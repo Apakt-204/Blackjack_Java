@@ -1,17 +1,22 @@
 import java.util.*;
-import java.util.Random;
 
-public class Blackjack {
+import javafx.scene.control.Label;
+
+public class Blackjack extends BlackjackGUI
+{
     static final int maxHand=21;
-    public static void main(String[] args) {
+    public static void main(String[] args) 
+    {
+        BlackjackGUI.main(null);
         Scanner sc = new Scanner(System.in);
         Random random = new Random();
         List<String> deck = initializeDeck();
         System.out.println("WELCOME TO BLACKJACK");
         int balance = getInitialBalance(sc);
         
-        while (true) {
-            System.out.println("BALANCE: $" + balance);
+        while (true) 
+        {
+            Label bal=new Label("BALANCE"+balance);
             int wager = getWager(sc, balance);
             balance -= wager;
 
@@ -26,7 +31,9 @@ public class Blackjack {
 
             balance += determineWinner(playerHand, dealerHand, wager, surrenderChoice);
             System.out.println("BALANCE LEFT: $" + balance);
-
+            
+            System.out.println("---------------------------------------------------------");
+            
             if (deck.size() <= 5) {
                 deck = initializeDeck();
             }
